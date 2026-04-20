@@ -13,7 +13,8 @@ import {
   SiHtml5,
   SiCss,
   SiSqlalchemy,
-  SiFastapi
+  SiFastapi,
+  SiGithub
 } from 'react-icons/si'
 import type React from 'react'
 
@@ -40,5 +41,6 @@ export const techIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVG
   'HTML':SiHtml5,
   'CSS':SiCss,
   'ALCHSQL':SiSqlalchemy,
-  "FastApi":SiFastapi
+  'FastApi':SiFastapi,
+  'Github':SiGithub
 }

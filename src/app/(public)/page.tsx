@@ -1,6 +1,7 @@
 import "../globals.css";
 
 import Presentation from "./home/components/Presentation";
+import Projects from "./home/components/Projects";
 import Skills from "./home/components/Skills";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     <div className="background-home min-h-screen px-6 sm:px-10">
       <Presentation />
       <Skills />
+      <Projects />
     </div>
   )
 }
