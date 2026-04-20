@@ -1,6 +1,7 @@
+import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
 
-type ButtonProps = React.PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>> & {
+interface ButtonProps extends ComponentProps<"button"> {
   className?: string
 }
 
