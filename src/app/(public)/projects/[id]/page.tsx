@@ -42,7 +42,7 @@ export default async function DetailProject({ params }: DetailProjectProps) {
           <div className="mt-2">
             <h3 className="text-lg font-semibold text-white">Tecnologias Usadas</h3>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mt-2">
               {project.tech_stack.map((tech) => {
                 const Icon = techIcons[tech]
                 return (

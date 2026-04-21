@@ -33,10 +33,10 @@ export default function Header() {
 
         {/* Desktop Navigator Links */}
         <nav className="hidden md:flex text-white gap-8 font-bold">
-          <Link className="hover:text-[#f9004d] transition-colors" href="#">Sobre mim</Link>
-          <Link className="hover:text-[#f9004d] transition-colors" href="#">Projetos</Link>
-          <Link className="hover:text-[#f9004d] transition-colors" href="#">Contatos</Link>
-          <Link className="hover:text-[#f9004d] transition-colors" href="#">Habilidades</Link>
+          <Link className="hover:text-[#f9004d] transition-colors" href="/#presentationSection">Sobre mim</Link>
+          <Link className="hover:text-[#f9004d] transition-colors" href="/#projectsSection">Projetos</Link>
+          <Link className="hover:text-[#f9004d] transition-colors" href="/contacts">Contatos</Link>
+          <Link className="hover:text-[#f9004d] transition-colors" href="/#skillsSection">Habilidades</Link>
         </nav>
       </div>
 
@@ -47,25 +47,25 @@ export default function Header() {
         <Link
           onClick={operateMenu}
           className="text-white font-bold hover:text-[#f9004d] transition-colors"
-          href="#"
+          href="/#presentationSection"
         >Sobre mim</Link>
 
         <Link
           onClick={operateMenu}
           className="text-white font-bold hover:text-[#f9004d] transition-colors"
-          href="#"
+          href="/#projectsSection"
         >Projetos</Link>
 
         <Link
           onClick={operateMenu}
           className="text-white font-bold hover:text-[#f9004d] transition-colors"
-          href="#"
+          href="/contacts"
         >Contatos</Link>
 
         <Link
           onClick={operateMenu}
           className="text-white font-bold hover:text-[#f9004d] transition-colors"
-          href="#"
+          href="/#skillsSection"
         >Habilidades</Link>
       </nav>
     </header>
