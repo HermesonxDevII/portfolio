@@ -35,8 +35,8 @@ export default function Header() {
         <nav className="hidden md:flex text-white gap-8 font-bold">
           <Link className="hover:text-[#f9004d] transition-colors" href="/#presentationSection">Sobre mim</Link>
           <Link className="hover:text-[#f9004d] transition-colors" href="/#projectsSection">Projetos</Link>
-          <Link className="hover:text-[#f9004d] transition-colors" href="/contacts">Contatos</Link>
           <Link className="hover:text-[#f9004d] transition-colors" href="/#skillsSection">Habilidades</Link>
+          <Link className="hover:text-[#f9004d] transition-colors" href="/contacts">Contatos</Link>
         </nav>
       </div>
 
@@ -59,14 +59,14 @@ export default function Header() {
         <Link
           onClick={operateMenu}
           className="text-white font-bold hover:text-[#f9004d] transition-colors"
-          href="/contacts"
-        >Contatos</Link>
+          href="/#skillsSection"
+        >Habilidades</Link>
 
         <Link
           onClick={operateMenu}
           className="text-white font-bold hover:text-[#f9004d] transition-colors"
-          href="/#skillsSection"
-        >Habilidades</Link>
+          href="/contacts"
+        >Contatos</Link>
       </nav>
     </header>
   )
