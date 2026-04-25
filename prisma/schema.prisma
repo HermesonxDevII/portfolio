@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Project {
+  id String @id @default(uuid())
+  name String
+  slug String
+  description String?
+  thumbnail String
+  link String
+  github String
+  images Image[]
+  skills Skill[]
+  tags String
+  highlight Boolean @default(false)
+  status Boolean @default(false)
+  index Int @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("projects")
+}
+
+model Image {
+  id String @id @default(uuid())
+  url String
+  projectId String @map("project_id")
+  project Project @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("images")
+}
+
+model SkillCategory {
+  id String @id @default(uuid())
+  name String
+  description String
+  skills Skill[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("skill_categories")
+}
+
+model Skill {
+  id String @id @default(uuid())
+  name String
+  description String
+  skillCategoryId String @map("skill_category_id")
+  skill SkillCategory @relation(fields: [skillCategoryId], references: [id])
+  projects Project[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("skills")
+}
