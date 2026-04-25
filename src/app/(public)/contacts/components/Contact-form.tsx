@@ -1,6 +1,7 @@
 'use client'
 
 import Button from "@/components/Button"
+import { FormStatus } from "@/types/FormStatus"
 import { useState } from "react"
 
 type FormData = {
@@ -9,8 +10,6 @@ type FormData = {
   telephone: string,
   message: string
 }
-
-type FormStatus = "idle" | "sending" | "success" | "error"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({

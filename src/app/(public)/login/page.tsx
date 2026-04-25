@@ -1,13 +1,12 @@
 'use client'
 
+import { FormStatus } from "@/types/FormStatus"
 import { useState } from "react"
 
 type FormData = {
   email: string,
   password: string
 }
-
-type FormStatus = "idle" | "sending" | "success" | "error"
 
 export default function Login() {
   const [formData, setFormData] = useState<FormData>({
@@ -17,7 +16,7 @@ export default function Login() {
 
   const [status, setStatus] = useState<FormStatus>('idle')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
