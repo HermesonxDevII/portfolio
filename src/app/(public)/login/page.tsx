@@ -2,6 +2,7 @@
 
 import { FormStatus } from "@/types/FormStatus"
 import { useState } from "react"
+import { login } from "@/app/actions/auth"
 
 type FormData = {
   email: string,
@@ -21,6 +22,10 @@ export default function Login() {
       ...formData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleSubmit = async () => {
+    await login(formData)
   }
 
   return (
