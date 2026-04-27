@@ -1,21 +1,27 @@
 'use client'
 
-import { FormStatus } from "@/types/FormStatus"
 import { useState } from "react"
-import { login } from "@/app/actions/auth"
+import { useRouter } from 'next/navigation'
 
-type FormData = {
-  email: string,
-  password: string
-}
+import { FormStatus } from "@/types/FormStatus"
+
+import { LoginData as FormData } from "@/types/auth"
+import { login } from "@/app/actions/auth"
+import { notify } from "@/lib/utils"
+
+import ShowPassword from "./components/ShowPassword"
+import Link from "next/link"
 
 export default function Login() {
+  const router = useRouter()
+
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: ''
   })
 
   const [status, setStatus] = useState<FormStatus>('idle')
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -24,14 +30,28 @@ export default function Login() {
     })
   }
 
-  const handleSubmit = async () => {
-    await login(formData)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    setStatus('sending')
+
+    const res = await login(formData)
+
+    if (!res.success) {
+      setStatus('error')
+      notify({ title: res.message, icon: 'error', timer: 3000 })
+    } else {
+      setStatus('success')
+      notify({ title: res.message, icon: 'success' })
+
+      router.push('/dashboard');
+    }
   }
 
   return (
     <main className="min-h-screen bg-black flex items-center justify-center px-4">
       <form
-        action=""
+        onSubmit={handleSubmit}
         className="w-full max-w-sm bg-[#141414] p-6 rounded-lg space-y-4"
       >
         <h1 className="text-2xl font-bold text-white text-center">Login</h1>
@@ -52,16 +72,26 @@ export default function Login() {
 
         <div className="space-y-2">
           <label htmlFor="password" className="block text-sm text-white/80">Senha</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className="w-full px-3 py-2 rounded-md bg-black text-white border border-white/10"
-            placeholder="Digite sua senha"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+          <div className="relative flex flex-row items-center">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              id="password"
+              className="w-full px-3 py-2 rounded-md bg-black text-white border border-white/10"
+              placeholder="Digite sua senha"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <ShowPassword showPassword={showPassword} setShowPassword={setShowPassword} />
+          </div>
+        </div>
+
+        <div className="flex justify-end space-y-2">
+          <Link
+            href="/"
+            className="text-xs text-white/50 hover:text-white hover:underline cursor-pointer"
+          >Voltar a home</Link>
         </div>
 
         <button

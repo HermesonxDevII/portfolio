@@ -1,5 +1,5 @@
-import ContactForm from "./components/Contact-form";
-import SocialContact from "./components/Social-contact";
+import ContactForm from "./components/ContactForm";
+import SocialContact from "./components/SocialContact";
 
 export default function Contact() {
   return (

@@ -1,11 +1,11 @@
 'use client'
 
+import { useState } from "react";
 import Link from "next/link";
 
-import Button from "@/components/Button";
-
-import { useState } from "react";
 import { X, Menu } from "lucide-react"
+
+import Button from "@/components/Button";
 
 export default function Header() {
 

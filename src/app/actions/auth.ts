@@ -138,3 +138,4 @@ export async function login(data: LoginData): Promise<ActionResponse> {
     return { success: false, message: "Ocorreu um erro ao tentar logar usuário." }
   }
 }
+
