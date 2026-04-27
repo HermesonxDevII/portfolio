@@ -3,11 +3,12 @@
 import bcrypt from 'bcryptjs';
 
 import { prisma } from "@/lib/prisma";
-import { createSession } from "@/lib/auth";
+import { createSession, deleteSession } from "@/lib/auth";
 import { hashPassword } from "@/lib/utils";
 
 import { ActionResponse } from "@/types/ActionResponse";
 import { RegisterData, LoginData } from "@/types/auth";
+import { redirect } from 'next/navigation';
 
 /**
  * Register the user and create a secure session using cookies.
@@ -139,3 +140,15 @@ export async function login(data: LoginData): Promise<ActionResponse> {
   }
 }
 
+/**
+ * Logout the user destroying their session.
+ *
+ * @example
+ * import { logout } from "@/app/actions/auth"
+ *
+ * await logout();
+ */
+export async function logout() {
+  await deleteSession()
+  redirect("/");
+}

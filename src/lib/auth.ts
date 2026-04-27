@@ -27,3 +27,16 @@ export async function createSession(id: string) {
     return false;
   }
 }
+
+export async function deleteSession() {
+  try {
+    const cookieStore = await cookies();
+
+    cookieStore.delete('session');
+
+    return true;
+  } catch (error) {
+    console.error('lib/auth.ts - deleteSession()', error);
+    return false;
+  }
+}
