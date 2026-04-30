@@ -4,8 +4,23 @@ import { jwtVerify } from 'jose';
 
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
+const publicRoutes = [
+  '/',
+  '/home',
+  '/contacts',
+  '/projects',
+  '/login'
+];
+
 export async function proxy(req: NextRequest) {
+  const { pathname } = req.nextUrl;
   const token = req.cookies.get('session')?.value;
+
+  const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route)) || pathname === '/';
+
+  if (isPublicRoute) {
+    return NextResponse.next();
+  }
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', req.url));
@@ -22,7 +37,6 @@ export async function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // '/dashboard/:path*',
     '/((?!api|_next/static|_next/image|favicon.ico|login).*)',
   ],
 };
