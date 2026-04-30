@@ -3,7 +3,7 @@ import { Project } from "@/types/Project";
 import AsideHeader from "./AsideHeader";
 import AsideFooter from "./AsideFooter";
 
-import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 interface AsideProps {
   projects: Project[]
@@ -15,8 +15,22 @@ export default function Aside({ projects }: AsideProps) {
       <AsideHeader qntProjects={projects.length} />
 
       {/* Projects */}
-      <div className="flex-1 overflow-y-auto py-3 px-3 space-y-1">
-        {projects.map((project) => (
+      <div className="flex-1 overflow-y-auto p-3 space-y-1">
+        <Link
+          href='/skills'
+          className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/30 transition"
+        >Habilidades</Link>
+
+        <Link
+          href='/skillsCategory'
+          className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/30 transition"
+        >Categoria de Habilidades</Link>
+
+        <Link
+          href='/skillsCategory'
+          className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/30 transition"
+        >Projetos</Link>
+        {/* {projects.map((project) => (
           <div
             key={project.id}
             className="flex items-center justify-between px-3 py-2.5 rounded-lg group transition"
@@ -44,7 +58,7 @@ export default function Aside({ projects }: AsideProps) {
               </button>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
 
       <AsideFooter />

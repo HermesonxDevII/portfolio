@@ -1,70 +1,66 @@
 'use client'
 
-import { projects } from "@/data/projects";
-import Aside from "./components/Aside";
-import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { FormStatus } from "@/types/FormStatus";
+// import { useState } from "react";
+// import { ChevronDown, ChevronUp } from "lucide-react";
+// import { FormStatus } from "@/types/FormStatus";
 
-type formData = {
-  title: string,
-  slug: string,
-  description: string,
-  thumbnail_url: string,
-  live_url: string,
-  github_url: string,
-  tech_stack: string[],
-  tags: string[],
-  featured: boolean,
-  status: string,
-  order_index: number,
-}
+// type formData = {
+//   title: string,
+//   slug: string,
+//   description: string,
+//   thumbnail_url: string,
+//   live_url: string,
+//   github_url: string,
+//   tech_stack: string[],
+//   tags: string[],
+//   featured: boolean,
+//   status: string,
+//   order_index: number,
+// }
 
 export default function Dashboard() {
 
-  const [formData, setFormData] = useState<formData>({
-    title: '',
-    slug: '',
-    description: '',
-    thumbnail_url: '',
-    live_url: '',
-    github_url: '',
-    tech_stack: [],
-    tags: [],
-    featured: false,
-    status: 'published',
-    order_index: 0,
-  })
+  // const [formData, setFormData] = useState<formData>({
+  //   title: '',
+  //   slug: '',
+  //   description: '',
+  //   thumbnail_url: '',
+  //   live_url: '',
+  //   github_url: '',
+  //   tech_stack: [],
+  //   tags: [],
+  //   featured: false,
+  //   status: 'published',
+  //   order_index: 0,
+  // })
 
-  const [formStatus, setFormStatus] = useState<FormStatus>('idle')
-  const [openForm, setOpenForm] = useState<boolean>(true)
+  // const [formStatus, setFormStatus] = useState<FormStatus>('idle')
+  // const [openForm, setOpenForm] = useState<boolean>(true)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   const { name, value, type } = e.target;
 
-    let newValue: string | number | boolean | string[] = value;
+  //   let newValue: string | number | boolean | string[] = value;
 
-    if (type === 'checkbox') {
-      newValue = (e.target as HTMLInputElement).checked;
-    } else if (type === 'number') {
-      newValue = Number(value);
-    } else if (name === 'tech_stack' || name === 'tags') {
-      newValue = value ? value.split(',').map(item => item.trim()) : [];
-    }
+  //   if (type === 'checkbox') {
+  //     newValue = (e.target as HTMLInputElement).checked;
+  //   } else if (type === 'number') {
+  //     newValue = Number(value);
+  //   } else if (name === 'tech_stack' || name === 'tags') {
+  //     newValue = value ? value.split(',').map(item => item.trim()) : [];
+  //   }
 
-    setFormData(prev => ({
-      ...prev,
-      [name]: newValue
-    }));
-  };
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     [name]: newValue
+  //   }));
+  // };
 
   return (
-    <main className="min-h-screen bg-[#0d0d0d] text-white">
+    <main>
       <div className="flex h-screen overflow-hidden">
-        <Aside projects={projects} />
-
         <div className="flex-1 overflow-y-auto px-8 py-8 space-y-6">
-          <section className="bg-[#141414] rounded-xl overflow-hidden">
+          {/* <section className="bg-[#141414] rounded-xl overflow-hidden">
             <button
               onClick={() => setOpenForm(prev => !prev)}
               type="button"
@@ -244,9 +240,9 @@ export default function Dashboard() {
                 </div>
               </form>
             )}
-          </section>
+          </section> */}
         </div>
       </div>
     </main>
-)
+  )
 }

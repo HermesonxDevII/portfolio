@@ -1,3 +1,5 @@
+'use client'
+
 import { logout } from "@/app/actions/auth"
 
 export default function AsideFooter() {
