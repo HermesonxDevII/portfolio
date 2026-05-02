@@ -1,22 +1,13 @@
+import type React from 'react'
+
 import {
   SiReact, SiTypescript, SiLaravel, SiMysql,
   SiPostgresql, SiDocker, SiDjango, SiBootstrap,
-  SiGooglegemini, SiPhp,
-  SiTailwindcss,
-  SiPython,
-  SiSqlite,
-  SiNodedotjs,
-  SiJavascript,
-  SiClaude,
-  SiN8N,
-  SiGithubactions,
-  SiHtml5,
-  SiCss,
-  SiSqlalchemy,
-  SiFastapi,
-  SiGithub
+  SiGooglegemini, SiPhp, SiTailwindcss, SiPython,
+  SiSqlite, SiNodedotjs, SiJavascript, SiClaude,
+  SiN8N, SiGithubactions, SiHtml5, SiCss,
+  SiSqlalchemy, SiFastapi, SiGithub
 } from 'react-icons/si'
-import type React from 'react'
 
 export const techIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   'React': SiReact,

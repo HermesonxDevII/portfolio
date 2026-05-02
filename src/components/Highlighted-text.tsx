@@ -6,10 +6,8 @@ interface HighlightedTextProps extends ComponentProps<"span"> {
 }
 
 export default function HighlightedText({ children, className, ...props }: HighlightedTextProps) {
-  const base = "text-[#f9004d]"
-
   return (
-    <span className={cn(base, className)} {...props}>
+    <span className={cn("text-[#f9004d]", className)} {...props}>
       {children}
     </span>
   )
