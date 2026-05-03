@@ -1,37 +1,37 @@
 'use client'
 
-import { useState } from "react";
+import { useState } from "react"
 
-import Link from "next/link";
+import Link from "next/link"
 
-import { X } from "lucide-react";
+import { X } from "lucide-react"
 
-import Container from "@/components/Container";
-import Title from "@/components/Title";
-import Label from "@/components/Label";
-import Input from "@/components/Input";
-import Textarea from "@/components/Textarea";
-import Button from "@/components/Button";
-import Select, { Option } from "@/components/Select";
+import { useRouter } from "next/navigation"
 
-import { CreateForm } from "@/types/Skill";
-import { FormStatus } from "@/types/FormStatus";
+import Container from "@/components/Container"
+import Title from "@/components/Title"
+import Button from "@/components/Button"
+import Label from "@/components/Label"
+import Textarea from "@/components/Textarea"
+import Input from "@/components/Input"
+
+import { FormStatus } from "@/types/FormStatus"
+import { CreateForm } from "@/types/SkillCategory"
+
+import { create } from "@/app/actions/skillCategory"
+
+import { notify } from "@/lib/utils"
 
 export default function Create() {
 
+  const router = useRouter()
+
   const [formData, setFormData] = useState<CreateForm>({
     name: '',
-    description: '',
-    skill_category_id: ''
+    description: ''
   })
 
   const [formStatus, setFormStatus] = useState<FormStatus>("idle")
-
-  const options: Option[] = [
-    { value: 'teste', label: 'teste' },
-    { value: 'teste 2', label: 'teste 2' },
-    { value: 'teste 3', label: 'teste 3' }
-  ]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -40,8 +40,22 @@ export default function Create() {
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
     setFormStatus("sending")
+
+    const response = await create(formData)
+
+    if (!response.success) {
+      setFormStatus('error')
+      notify({ title: response.message, icon: 'error', timer: 3000 })
+    } else {
+      setFormStatus('success')
+
+      router.push('/skillsCategory');
+      notify({ title: response.message, icon: 'success' })
+    }
   }
 
   return (
@@ -50,7 +64,7 @@ export default function Create() {
         <Title>Cadastrar Habilidade</Title>
 
         <Link
-          href="/skills"
+          href="/skillsCategory"
           className="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#f9004d] text-white/60 hover:text-white transition"
         >
           <X className="w-4 h-4" />
@@ -86,17 +100,6 @@ export default function Create() {
           ></Textarea>
         </div>
 
-        <div className="flex flex-col gap-1 sm:col-span-2">
-          <Label htmlFor="skill_category_id" required>Categoria</Label>
-          <Select
-            id="skill_category_id"
-            name="skill_category_id"
-            options={options}
-            value={formData.skill_category_id}
-            onChange={handleChange}
-          />
-        </div>
-
         <div className="flex flex-row gap-3 sm:col-span-2">
           <Button
             type="submit"
@@ -107,7 +110,7 @@ export default function Create() {
           </Button>
 
           <Link
-            href="/skills"
+            href="/skillsCategory"
             className="px-6 py-2 bg-[#1a1a1a] rounded-lg text-sm font-normal hover:bg-white/10 transition"
           >
             Cancelar

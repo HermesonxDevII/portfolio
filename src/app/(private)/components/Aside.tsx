@@ -17,7 +17,7 @@ export default function Aside() {
         <Link
           href='/skillsCategory'
           className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/30 transition"
-        >Categoria de Habilidades</Link>
+        >Categorias de Habilidades</Link>
 
         <Link
           href='/skillsCategory'

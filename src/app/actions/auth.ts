@@ -8,7 +8,6 @@ import { hashPassword } from "@/lib/utils";
 
 import { ActionResponse } from "@/types/ActionResponse";
 import { RegisterData, LoginData } from "@/types/auth";
-import { redirect } from 'next/navigation';
 
 /**
  * Register the user and create a secure session using cookies.
@@ -71,7 +70,7 @@ export async function register(data: RegisterData): Promise<ActionResponse> {
       data: { user: safeUser }
     }
   } catch (error) {
-    console.error('actions/auth.ts - register()', error)
+    console.error('/actions/auth.ts - register()', error)
     return { success: false, message: "Ocorreu um erro ao tentar registrar usuário." }
   }
 }
@@ -135,7 +134,7 @@ export async function login(data: LoginData): Promise<ActionResponse> {
       data: { user: safeUser }
     }
   } catch (error) {
-    console.error('actions/auth.ts - login()', error)
+    console.error('/actions/auth.ts - login()', error)
     return { success: false, message: "Ocorreu um erro ao tentar logar usuário." }
   }
 }
@@ -150,5 +149,4 @@ export async function login(data: LoginData): Promise<ActionResponse> {
  */
 export async function logout() {
   await deleteSession()
-  redirect("/");
 }
