@@ -1,8 +1,9 @@
+import Container from "./Container"
 import { Skeleton as SkeletonComponent } from "@/components/ui/skeleton"
 
 export default function Skeleton() {
   return (
-    <div className="flex flex-col gap-3">
+    <Container className="flex flex-col gap-3">
       <div className="w-full flex items-center justify-between">
         <SkeletonComponent className="h-8 w-3/5" />
         <SkeletonComponent className="h-8 w-8 rounded-lg" />
@@ -20,6 +21,6 @@ export default function Skeleton() {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }

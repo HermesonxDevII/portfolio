@@ -5,15 +5,12 @@ import { Plus } from "lucide-react";
 import Container from "@/components/Container";
 import Title from "@/components/Title";
 import Badge from "@/components/Badge";
-import Skeleton from "@/components/Skeleton";
 
 import { index } from "@/app/actions/skillCategory";
 
 export default async function Index() {
 
-  const skills_categories = await index()
-
-  if (!skills_categories) return <Skeleton />
+  const data = await index()
 
   return (
     <Container>
@@ -32,12 +29,16 @@ export default async function Index() {
         <div className="flex flex-col gap-3">
           <div>
             <Title className="text-md flex justify-start">Categorias</Title>
-            <p className="text-white/40 text-xs mt-0.5">{skills_categories.length} cadastrados</p>
+            <p className="text-white/40 text-xs mt-0.5">{data.length} cadastrados</p>
           </div>
 
           <div className="flex flex-wrap gap-3">
-            {skills_categories.map((skill_category) => (
-              <Badge key={skill_category.id} label={skill_category.name} />
+            {data.map((skill_category) => (
+              <Badge
+                key={skill_category.id}
+                label={skill_category.name}
+                linkable={`skillsCategory/${skill_category.id}/edit`}
+              />
             ))}
           </div>
         </div>
