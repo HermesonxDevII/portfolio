@@ -45,9 +45,7 @@ export async function show(id: string) {
     if (!id)
       throw new Error("O campo 'id' é obrigatório.")
 
-    return await prisma.skillCategory.findUniqueOrThrow({
-      where: { id: id }
-    })
+    return await prisma.skillCategory.findUniqueOrThrow({ where: { id: id } })
   } catch (error) {
     console.error('/actions/skillCategory - show()', error)
     notFound()

@@ -1,16 +1,10 @@
-export type Project = {
-  id: string,
-  title: string,
-  slug: string,
-  description: string,
-  thumbnail_url: string,
-  live_url: string | null,
-  github_url: string,
-  tech_stack: string[],
-  tags: string[],
-  featured: boolean,
+export type CreateForm = {
+  name: string,
+  description?: string,
+  link?: string,
+  github: string,
+  type: string,
   status: string,
-  order_index: number,
-  created_at: string,
-  updated_at: string
+  index: number,
+  skills: string[]
 }

@@ -18,6 +18,7 @@ import { RiNextjsFill, RiSupabaseFill } from "react-icons/ri";
 import { VscRemoteExplorer } from "react-icons/vsc";
 import { IoLogoBitbucket } from "react-icons/io";
 import { GoWorkflow } from "react-icons/go";
+import { Cable } from 'lucide-react';
 
 export const techIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   // Front-end
@@ -41,6 +42,9 @@ export const techIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVG
   'Django':SiDjango,
   'FastApi':SiFastapi,
   'NodeJS':SiNodedotjs,
+
+  // Fullstack
+  'FullStack':Cable,
 
   // DevOps
   'DevOps':GrDeploy,

@@ -26,15 +26,12 @@ model User {
 model Project {
   id String @id @default(uuid())
   name String
-  slug String
   description String?
-  thumbnail String
-  link String
+  link String?
   github String
   images Image[]
   skills Skill[]
-  tags String
-  highlight Boolean @default(false)
+  type String
   status Boolean @default(false)
   index Int @default(0)
   createdAt DateTime @default(now()) @map("created_at")
@@ -46,6 +43,7 @@ model Project {
 model Image {
   id String @id @default(uuid())
   url String
+  index Int @default(0)
   projectId String @map("project_id")
   project Project @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
