@@ -4,6 +4,7 @@ export type CreateForm = {
 }
 
 export type EditForm = {
+  id: string,
   name?: string,
   description?: string
 }

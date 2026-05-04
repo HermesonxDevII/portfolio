@@ -39,7 +39,7 @@ export default function Login() {
 
     if (!res.success) {
       setStatus('error')
-      notify({ title: res.message, icon: 'error', timer: 3000 })
+      notify({ title: res.message, icon: 'error' })
     } else {
       setStatus('success')
       notify({ title: res.message, icon: 'success' })

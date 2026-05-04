@@ -8,12 +8,12 @@ import { X } from "lucide-react"
 
 import { useRouter } from "next/navigation"
 
-import Container from "@/components/Container"
-import Title from "@/components/Title"
-import Button from "@/components/Button"
-import Label from "@/components/Label"
-import Textarea from "@/components/Textarea"
-import Input from "@/components/Input"
+import Container from "@/components/container"
+import Title from "@/components/title"
+import Button from "@/components/button"
+import Label from "@/components/label"
+import Textarea from "@/components/textarea"
+import Input from "@/components/input"
 
 import { FormStatus } from "@/types/FormStatus"
 import { CreateForm } from "@/types/SkillCategory"
@@ -49,7 +49,7 @@ export default function Create() {
 
     if (!response.success) {
       setFormStatus('error')
-      notify({ title: response.message, icon: 'error', timer: 3000 })
+      notify({ title: response.message, icon: 'error' })
     } else {
       setFormStatus('success')
 
@@ -61,7 +61,7 @@ export default function Create() {
   return (
     <Container>
       <div className="w-full flex items-center justify-between">
-        <Title>Cadastrar Habilidade</Title>
+        <Title>Cadastrar categoria de habilidade</Title>
 
         <Link
           href="/skillsCategory"

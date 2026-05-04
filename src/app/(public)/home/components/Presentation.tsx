@@ -1,5 +1,5 @@
-import Button from "@/components/Button";
-import HighlightedText from "@/components/Highlighted-text";
+import Button from "@/components/button";
+import HighlightedText from "@/components/highlightedText";
 import Link from "next/link";
 
 export default function Presentation() {

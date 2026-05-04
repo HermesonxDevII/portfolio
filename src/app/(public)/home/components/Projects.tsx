@@ -1,4 +1,4 @@
-import HighlightedText from "@/components/Highlighted-text";
+import HighlightedText from "@/components/highlightedText";
 import { projects } from "@/data/projects";
 import { truncateText } from "@/lib/utils";
 import Image from "next/image";

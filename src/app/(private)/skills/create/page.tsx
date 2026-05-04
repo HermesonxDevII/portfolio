@@ -6,13 +6,13 @@ import Link from "next/link";
 
 import { X } from "lucide-react";
 
-import Container from "@/components/Container";
-import Title from "@/components/Title";
-import Label from "@/components/Label";
-import Input from "@/components/Input";
-import Textarea from "@/components/Textarea";
-import Button from "@/components/Button";
-import Select, { Option } from "@/components/Select";
+import Container from "@/components/container";
+import Title from "@/components/title";
+import Label from "@/components/label";
+import Input from "@/components/input";
+import Textarea from "@/components/textarea";
+import Button from "@/components/button";
+import Select, { Option } from "@/components/select";
 
 import { CreateForm } from "@/types/Skill";
 import { FormStatus } from "@/types/FormStatus";

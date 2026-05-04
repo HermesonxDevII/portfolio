@@ -7,7 +7,7 @@ interface BadgeProps {
 }
 
 export default function Badge({ label, linkable = '#' }: BadgeProps) {
-  const Icon = techIcons['React'];
+  const Icon = techIcons[label];
 
   return (
     <Link

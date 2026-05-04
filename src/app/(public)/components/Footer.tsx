@@ -1,4 +1,4 @@
-import HighlightedText from "@/components/Highlighted-text";
+import HighlightedText from "@/components/highlightedText";
 
 export default function Footer() {
   return (
@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-3 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
         <p>
           © {new Date().getFullYear()}{" "}
-          <span className="font-semibold text-white">Hermeson Oliveira</span>. 
+          <span className="font-semibold text-white">Hermeson Oliveira</span>.
           Todos os direitos reservados.
         </p>
 

@@ -2,8 +2,8 @@ import { Plus } from "lucide-react";
 
 import Link from "next/link";
 
-import Title from "@/components/Title";
-import Container from "@/components/Container";
+import Title from "@/components/title";
+import Container from "@/components/container";
 import SkillBadge from "./components/SkillBadge";
 
 export default function Skills() {

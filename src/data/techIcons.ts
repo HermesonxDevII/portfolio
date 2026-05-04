@@ -9,6 +9,11 @@ import {
   SiSqlalchemy, SiFastapi, SiGithub
 } from 'react-icons/si'
 
+import { HiDatabase } from "react-icons/hi";
+import { FaMobileScreen } from "react-icons/fa6";
+import { FaServer } from "react-icons/fa";
+import { GrDeploy } from "react-icons/gr";
+
 export const techIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   'React': SiReact,
   'TypeScript': SiTypescript,
@@ -33,5 +38,9 @@ export const techIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVG
   'CSS':SiCss,
   'ALCHSQL':SiSqlalchemy,
   'FastApi':SiFastapi,
-  'Github':SiGithub
+  'Github':SiGithub,
+  'Back-End':FaServer,
+  'Front-End':FaMobileScreen,
+  'DevOps':GrDeploy,
+  'Database':HiDatabase,
 }

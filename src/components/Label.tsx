@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
-import HighlightedText from "./Highlighted-text";
+import HighlightedText from "./highlightedText";
 
 interface LabelProps extends ComponentProps<"label"> {
   className?: string,

@@ -2,14 +2,12 @@ import Link from "next/link"
 
 import { X } from "lucide-react"
 
-import Container from "@/components/Container"
-import Title from "@/components/Title"
+import Container from "@/components/container"
+import Title from "@/components/title"
 
-import Form from "./components/form"
+import EditForm from "../../components/editForm"
 
 import { show } from "@/app/actions/skillCategory"
-
-import FormSkeleton from "@/components/Skeleton/FormSkeleton"
 
 type Params = {
   id: string
@@ -25,10 +23,9 @@ export default async function Edit({ params }: EditProps) {
   const data = await show(id)
 
   return (
-    // <FormSkeleton />
     <Container>
       <div className="w-full flex items-center justify-between">
-        <Title>Cadastrar Habilidade</Title>
+        <Title>Atualizar categoria de habilidade</Title>
 
         <Link
           href="/skillsCategory"
@@ -38,7 +35,7 @@ export default async function Edit({ params }: EditProps) {
         </Link>
       </div>
 
-      <Form data={data} />
+      <EditForm data={data} />
     </Container>
   )
 }

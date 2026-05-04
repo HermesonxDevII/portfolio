@@ -1,4 +1,4 @@
-import HighlightedText from "@/components/Highlighted-text";
+import HighlightedText from "@/components/highlightedText";
 
 import { skills } from "@/data/skills";
 import { techIcons } from "@/data/techIcons";

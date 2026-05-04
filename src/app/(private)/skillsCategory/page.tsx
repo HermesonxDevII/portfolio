@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import { Plus } from "lucide-react";
 
-import Container from "@/components/Container";
-import Title from "@/components/Title";
-import Badge from "@/components/Badge";
+import Container from "@/components/container";
+import Title from "@/components/title";
+import Badge from "@/components/badge";
 
 import { index } from "@/app/actions/skillCategory";
 
