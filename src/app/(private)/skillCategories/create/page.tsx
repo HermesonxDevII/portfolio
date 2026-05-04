@@ -53,7 +53,7 @@ export default function Create() {
     } else {
       setFormStatus('success')
 
-      router.push('/skillsCategory');
+      router.push('/skillCategories');
       notify({ title: response.message, icon: 'success' })
     }
   }
@@ -64,7 +64,7 @@ export default function Create() {
         <Title>Cadastrar categoria de habilidade</Title>
 
         <Link
-          href="/skillsCategory"
+          href="/skillCategories"
           className="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#f9004d] text-white/60 hover:text-white transition"
         >
           <X className="w-4 h-4" />
@@ -110,7 +110,7 @@ export default function Create() {
           </Button>
 
           <Link
-            href="/skillsCategory"
+            href="/skillCategories"
             className="px-6 py-2 bg-[#1a1a1a] rounded-lg text-sm font-normal hover:bg-white/10 transition"
           >
             Cancelar

@@ -18,7 +18,7 @@ export default async function Index() {
         <Title>Categorias de Habilidades</Title>
 
         <Link
-          href="/skillsCategory/create"
+          href="/skillCategories/create"
           className="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#f9004d] text-white/60 hover:text-white transition"
         >
           <Plus className="w-4 h-4" />
@@ -37,7 +37,7 @@ export default async function Index() {
               <Badge
                 key={skill_category.id}
                 label={skill_category.name}
-                linkable={`skillsCategory/${skill_category.id}/edit`}
+                linkable={`/skillCategories/${skill_category.id}/edit`}
               />
             ))}
           </div>

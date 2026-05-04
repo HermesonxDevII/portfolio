@@ -14,7 +14,7 @@ interface SelectProps extends ComponentProps<"select"> {
 export default function Select({ className, options, ...props }: SelectProps) {
   return (
     <select
-      className={cn("bg-black border border-white/10 rounded px-3 py-2 text-sm", className)}
+      className={cn("bg-black border border-white/10 rounded-md px-3 py-2 text-sm", className)}
       {...props}
     >
       {options.map((option) => (

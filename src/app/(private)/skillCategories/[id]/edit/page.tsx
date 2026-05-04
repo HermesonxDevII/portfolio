@@ -28,7 +28,7 @@ export default async function Edit({ params }: EditProps) {
         <Title>Atualizar categoria de habilidade</Title>
 
         <Link
-          href="/skillsCategory"
+          href="/skillCategories"
           className="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#f9004d] text-white/60 hover:text-white transition"
         >
           <X className="w-4 h-4" />

@@ -11,11 +11,7 @@ import { ActionResponse } from "@/types/ActionResponse"
 
 export async function index() {
   try {
-    return await prisma.skillCategory.findMany({
-      orderBy: {
-        createdAt: 'desc'
-      }
-    })
+    return await prisma.skillCategory.findMany({ orderBy: { createdAt: 'desc' } })
   } catch (error) {
     console.error('/actions/skillCategory - index()', error)
     return []
@@ -37,7 +33,7 @@ export async function create(data: CreateForm): Promise<ActionResponse> {
 
   try {
     await prisma.skillCategory.create({ data: validated.data });
-    return { success: true, message: "Categoria de Habilidade criada com sucesso!" };
+    return { success: true, message: "Categoria de Habilidade cadastrada com sucesso!" };
   } catch (error) {
     console.error('/actions/skillCategory - create()', error)
     return { success: false, message: 'Ocorreu um erro ao tentar cadastrar categoria de habilidade.' }
@@ -92,11 +88,21 @@ export async function deleteInDatabase(id: string) {
     if (!id)
       throw new Error("O campo 'id' é obrigatório.")
 
-    return await prisma.skillCategory.delete({
-      where: { id: id }
-    })
+    return await prisma.skillCategory.delete({ where: { id: id } })
   } catch (error) {
     console.error('/actions/skillCategory - deleteInDatabase()', error)
     notFound()
+  }
+}
+
+export async function categoriesWithSkills() {
+  try {
+    return prisma.skillCategory.findMany({
+      orderBy: { name: 'desc' },
+      include: { skills: true }
+    })
+  } catch (error) {
+    console.error('/actions/skillCategory - categoriesWithSkills()', error)
+    return []
   }
 }

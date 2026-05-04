@@ -8,7 +8,7 @@ interface TextareaProps extends ComponentProps<"textarea"> {
 export default function Textarea({ className, ...props }: TextareaProps) {
   return (
     <textarea
-      className={cn("bg-black border border-white/10 rounded px-3 py-2 text-sm resize-none", className)}
+      className={cn("bg-black border border-white/10 rounded-md px-3 py-2 text-sm resize-none", className)}
       {...props}
     ></textarea>
   )

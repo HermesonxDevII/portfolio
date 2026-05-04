@@ -4,9 +4,14 @@ import Link from "next/link";
 
 import Title from "@/components/title";
 import Container from "@/components/container";
-import SkillBadge from "./components/SkillBadge";
 
-export default function Skills() {
+import { categoriesWithSkills } from "@/app/actions/skillCategory";
+import Badge from "@/components/badge";
+
+export default async function Index() {
+
+  const data = await categoriesWithSkills()
+
   return (
     <Container>
       <div className="w-full flex items-center justify-between">
@@ -21,49 +26,24 @@ export default function Skills() {
       </div>
 
       <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-3">
-          <div>
-            <Title className="text-md flex justify-start">Front-End</Title>
-            <p className="text-white/40 text-xs mt-0.5">4 cadastrados</p>
-          </div>
+        {data.map((category) => (
+          <div key={category.id} className="flex flex-col gap-3">
+            <div>
+              <Title className="text-md flex justify-start">{category.name}</Title>
+              <p className="text-white/40 text-xs mt-0.5">{category.skills.length} cadastrados</p>
+            </div>
 
-          <div className="flex flex-wrap gap-3">
-            <SkillBadge />
+            <div className="flex flex-wrap gap-3">
+              {category.skills.map((skill) => (
+                <Badge
+                  key={skill.id}
+                  label={skill.name}
+                  linkable={`/skills/${skill.id}/edit`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <div>
-            <Title className="text-md flex justify-start">Back-End</Title>
-            <p className="text-white/40 text-xs mt-0.5">4 cadastrados</p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <SkillBadge />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <div>
-            <Title className="text-md flex justify-start">DevOps</Title>
-            <p className="text-white/40 text-xs mt-0.5">4 cadastrados</p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <SkillBadge />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <div>
-            <Title className="text-md flex justify-start">Database</Title>
-            <p className="text-white/40 text-xs mt-0.5">4 cadastrados</p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <SkillBadge />
-          </div>
-        </div>
+        ))}
       </div>
     </Container>
   )

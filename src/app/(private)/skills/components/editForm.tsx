@@ -1,30 +1,33 @@
 'use client'
 
-import { useState } from "react"
+import { useMemo, useState } from "react";
 
 import { useRouter } from "next/navigation"
 
-import Link from "next/link"
+import Link from "next/link";
 
-import { Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react";
 
-import Button from "@/components/button"
-import Input from "@/components/input"
-import Label from "@/components/label"
-import Textarea from "@/components/textarea"
+import Label from "@/components/label";
+import Input from "@/components/input";
+import Textarea from "@/components/textarea";
+import Button from "@/components/button";
+import Select, { Option } from "@/components/select";
 
-import { EditForm as EditFormType } from "@/types/SkillCategory"
+import { EditForm as EditFormType } from "@/types/Skill";
+import { FormStatus } from "@/types/FormStatus";
 
-import { FormStatus } from "@/types/FormStatus"
+import { edit, deleteInDatabase } from "@/app/actions/skills";
 
-import { edit, deleteInDatabase } from "@/app/actions/skillCategory"
+import { notify } from "@/lib/utils";
 
-import { notify } from "@/lib/utils"
-
-import { SkillCategory } from "../../../../../generated/prisma/client"
+import { Skill, SkillCategory } from "../../../../../generated/prisma/client"
 
 interface EditFormProps {
-  data: SkillCategory
+  data: {
+    skill: Skill,
+    skill_categories: SkillCategory[]
+  }
 }
 
 export default function EditForm({ data }: EditFormProps) {
@@ -32,12 +35,20 @@ export default function EditForm({ data }: EditFormProps) {
   const router = useRouter()
 
   const [formData, setFormData] = useState<EditFormType>({
-    id: data.id,
-    name: data.name,
-    description: data.description
+    id: data.skill.id,
+    name: data.skill.name,
+    description: data.skill.description,
+    skillCategoryId: data.skill.skillCategoryId
   })
 
   const [formStatus, setFormStatus] = useState<FormStatus>("idle")
+
+  const options: Option[] = useMemo(() => {
+    return data.skill_categories.map(item => ({
+      value: item.id,
+      label: item.name
+    }))
+  }, [data])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -59,16 +70,16 @@ export default function EditForm({ data }: EditFormProps) {
     } else {
       setFormStatus('success')
 
-      router.push('/skillsCategory');
+      router.push('/skills');
       notify({ title: response.message, icon: 'success' })
     }
   }
 
   const handleDelete = async () => {
-    deleteInDatabase(data.id)
+    deleteInDatabase(data.skill.id)
 
-    router.push('/skillsCategory');
-    notify({ title: 'Categoria de Habilidade deletada com sucesso!', icon: 'success' })
+    router.push('/skills');
+    notify({ title: 'Habilidade deletada com sucesso!', icon: 'success' })
   }
 
   return (
@@ -77,7 +88,7 @@ export default function EditForm({ data }: EditFormProps) {
       className="pb-6 grid grid-cols-1 sm:grid-cols-2 gap-4"
     >
       <div className="flex flex-col gap-1 sm:col-span-2">
-        <Label htmlFor="name" required>Nome</Label>
+        <Label htmlFor="name">Nome</Label>
         <Input
           type="text"
           name="name"
@@ -89,7 +100,7 @@ export default function EditForm({ data }: EditFormProps) {
       </div>
 
       <div className="flex flex-col gap-1 sm:col-span-2">
-        <Label htmlFor="description" required>Descrição</Label>
+        <Label htmlFor="description">Descrição</Label>
         <Textarea
           name="description"
           id="description"
@@ -98,6 +109,18 @@ export default function EditForm({ data }: EditFormProps) {
           placeholder="Digite uma descrição"
           onChange={handleChange}
         ></Textarea>
+      </div>
+
+      <div className="flex flex-col gap-1 sm:col-span-2">
+        <Label htmlFor="skillCategoryId" required>Categoria</Label>
+        <Select
+          id="skillCategoryId"
+          name="skillCategoryId"
+          options={options}
+          value={formData.skillCategoryId}
+          onChange={handleChange}
+          required
+        />
       </div>
 
       <div className="flex flex-row justify-between sm:col-span-2">
@@ -111,7 +134,7 @@ export default function EditForm({ data }: EditFormProps) {
           </Button>
 
           <Link
-            href="/skillsCategory"
+            href="/skills"
             className="px-6 py-2 bg-[#1a1a1a] rounded-lg text-sm font-normal hover:bg-white/10 transition"
           >
             Cancelar
