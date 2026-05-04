@@ -21,7 +21,7 @@ export async function index() {
 export async function create(data: CreateForm): Promise<ActionResponse> {
   const createRequest = z.object({
     name: z.string().min(1, "O campo 'nome' é obrigatório."),
-    description: z.string().min(1, "O campo 'descrição' é obrigatório."),
+    description: z.string().trim().optional(),
   });
 
   const validated = createRequest.safeParse(data);

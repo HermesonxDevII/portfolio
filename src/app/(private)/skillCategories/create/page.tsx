@@ -89,7 +89,7 @@ export default function Create() {
         </div>
 
         <div className="flex flex-col gap-1 sm:col-span-2">
-          <Label htmlFor="description" required>Descrição</Label>
+          <Label htmlFor="description">Descrição</Label>
           <Textarea
             name="description"
             id="description"

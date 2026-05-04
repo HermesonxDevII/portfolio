@@ -37,7 +37,7 @@ export default function EditForm({ data }: EditFormProps) {
   const [formData, setFormData] = useState<EditFormType>({
     id: data.skill.id,
     name: data.skill.name,
-    description: data.skill.description,
+    description: data.skill.description ?? '',
     skillCategoryId: data.skill.skillCategoryId
   })
 

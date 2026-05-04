@@ -34,7 +34,7 @@ export default function EditForm({ data }: EditFormProps) {
   const [formData, setFormData] = useState<EditFormType>({
     id: data.id,
     name: data.name,
-    description: data.description
+    description: data.description ?? ''
   })
 
   const [formStatus, setFormStatus] = useState<FormStatus>("idle")
