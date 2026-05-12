@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation"
+
 import Title from "@/components/title";
 import Label from "@/components/label";
 import Input from "@/components/input";
@@ -16,6 +18,11 @@ import { FormStatus } from "@/types/FormStatus";
 import { CreateForm as CreateFormType } from "@/types/Project";
 import { CategoryWithSkills } from "@/types/SkillCategory";
 
+import { create } from "@/app/actions/projects";
+
+import { notify } from "@/lib/utils";
+
+type Section = 1 | 2
 
 interface CreateFormProps {
   data: {
@@ -25,19 +32,21 @@ interface CreateFormProps {
 
 export default function CreateForm({ data }: CreateFormProps) {
 
+  const router = useRouter()
+
   const [formData, setFormData] = useState<CreateFormType>({
     name: '',
     description: '',
     link: '',
     github: '',
-    type: '',
-    status: '',
+    type: 'Front-End',
+    status: 'inactive',
     index: 0,
     skills: []
   })
 
   const [formStatus, setFormStatus] = useState<FormStatus>('idle')
-  const [section, setSection] = useState<number>(1)
+  const [section, setSection] = useState<Section>(1)
 
   const typeOptions: Option[] = [
     { value: 'Front-End', label: 'Front-End' },
@@ -70,7 +79,7 @@ export default function CreateForm({ data }: CreateFormProps) {
     });
   };
 
-  const handleChangeSection = (e: React.FormEvent, section: number) => {
+  const handleChangeSection = (e: React.FormEvent, section: Section) => {
     e.preventDefault();
     setSection(section);
   }
@@ -80,9 +89,19 @@ export default function CreateForm({ data }: CreateFormProps) {
 
     setFormStatus('sending')
 
-    console.log(formData)
+    const response = await create(formData)
 
-    setFormStatus('success')
+    if (!response.success) {
+      setFormStatus('error')
+      notify({ title: response.message, icon: 'error' })
+    } else {
+      setFormStatus('success')
+
+      const { id } = response.data!
+
+      router.push(`/projects/${id}/uploads`);
+      notify({ title: response.message, icon: 'success'})
+    }
   }
 
   return (
@@ -207,11 +226,6 @@ export default function CreateForm({ data }: CreateFormProps) {
         </div>
       }
 
-      {section === 3 &&
-        <>
-        </>
-      }
-
       <div className="flex flex-row gap-3 sm:col-span-2">
         {section === 1 && (
           <>
@@ -250,15 +264,6 @@ export default function CreateForm({ data }: CreateFormProps) {
               Voltar
             </Button>
           </>
-        )}
-
-        {section === 3 && (
-          <Link
-            href="/projects"
-            className="text-sm text-white min-h-10 px-6 py-2 rounded-lg font-medium bg-[#f9004d] hover:bg-[#f9004d]/90 cursor-pointer transition"
-          >
-            Finalizar
-          </Link>
         )}
       </div>
     </form>

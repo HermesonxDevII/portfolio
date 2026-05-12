@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 
 import { prisma } from "@/lib/prisma"
 
-import { CreateForm } from "@/types/Project"
+import { CreateForm, CreateResponse } from "@/types/Project"
 import { ActionResponse } from "@/types/ActionResponse"
 
 export async function index() {
@@ -18,7 +18,7 @@ export async function index() {
   }
 }
 
-export async function create(data: CreateForm): Promise<ActionResponse> {
+export async function create(data: CreateForm): Promise<ActionResponse<CreateResponse>> {
   const createRequest = z.object({
     name: z.string().min(1, "O campo 'nome' é obrigatório."),
     description: z.string().trim().optional(),
@@ -40,7 +40,7 @@ export async function create(data: CreateForm): Promise<ActionResponse> {
   try {
     const { status, skills, ...createData } = validated.data
 
-    await prisma.project.create({
+    const { id } = await prisma.project.create({
       data: {
         ...createData,
         status: status === 'active',
@@ -50,7 +50,7 @@ export async function create(data: CreateForm): Promise<ActionResponse> {
       }
     })
 
-    return { success: true, message: 'Projeto cadastrado com sucesso!' }
+    return { success: true, message: 'Projeto cadastrado com sucesso!', data: { 'id': id }}
   } catch (error) {
     console.error('/actions/projects - create()', error)
     return { success: false, message: 'Ocorreu um erro ao tentar cadastrar projeto.' }
@@ -77,6 +77,23 @@ export async function deleteInDatabase(id: string) {
     return await prisma.project.delete({ where: { id: id } })
   } catch (error) {
     console.error('/actions/projects - deleteInDatabase()', error)
+    notFound()
+  }
+}
+
+export async function images(id: string) {
+  try {
+    if (!id)
+      throw new Error("O campo 'id' é obrigatório.")
+
+    return await prisma.project.findUniqueOrThrow({
+      where: { id: id },
+      select: {
+        images: { orderBy: { index: 'asc' } }
+      }
+    })
+  } catch (error) {
+    console.error('/actions/projects - images()', error)
     notFound()
   }
 }

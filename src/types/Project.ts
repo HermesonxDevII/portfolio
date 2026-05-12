@@ -8,3 +8,7 @@ export type CreateForm = {
   index: number,
   skills: string[]
 }
+
+export type CreateResponse = {
+  id: string
+}
